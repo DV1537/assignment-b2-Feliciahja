@@ -14,6 +14,7 @@ class Figure
     Figure(Shape** shapes, int numShapes);
     void addShape(Shape *s);
     Line getBoundingBox();
+    Shape** getClosest(Shape* location, int n);
     ~Figure();
 };
 

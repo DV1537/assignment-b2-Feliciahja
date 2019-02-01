@@ -56,17 +56,13 @@ int main(int argc, const char * argv[])
 
     Figure figure(shapes, numShapes);
 
-    
-    Line line = figure.getBoundingBox();
+    Shape **closestShapes = figure.getClosest(shapes[0], 3);
 
-    std::cout << line;
+    for(int i = 0; i < 3; i++)
+    {
+        std::cout << *closestShapes[i];
+    }
 
-
-/* 
-    Shape &combinedShapes = *shapes[0] + *shapes[1];
-
-    std::cout << combinedShapes.area();
-*/
 
     std::getchar();
 

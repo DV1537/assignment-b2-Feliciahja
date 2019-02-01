@@ -1,4 +1,5 @@
 #include "Figure.h"
+#include "Functions.h"
 #include <iostream>
 #include <sstream>
 
@@ -82,6 +83,41 @@ Line Figure::getBoundingBox()
     Line line(xCoord, yCoord, 2);
 
     return line;
+}
+
+Shape** Figure::getClosest(Shape* location, int n)
+{
+    if(n > numShapes)
+    {
+        return figure;
+    }
+    double *distances = new double[numShapes];
+    
+    for(int i = 0; i < numShapes; i++)
+    {
+        distances[i] = figure[i] -> distance(location);
+    }
+    int startingIndex = 0;
+    int endingIndex = (numShapes - 1);
+    
+    quickSort(distances, startingIndex, endingIndex);
+
+    Shape **closestShapes = new Shape*[n];
+
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < numShapes; j++)
+        {
+            if(distances[i] == figure[j] -> distance(location))
+            {
+                closestShapes[i] = figure[j];
+            }
+        }
+    }
+    delete [] distances;
+    distances = nullptr;
+    
+    return closestShapes;
 }
 
 Figure::~Figure()
